@@ -1,0 +1,8 @@
+D:\Progra\AcademiaApp\AcademiaApp\bin\Debug\AcademiaApp.exe
+D:\Progra\AcademiaApp\AcademiaApp\bin\Debug\AcademiaApp.pdb
+D:\Progra\AcademiaApp\AcademiaApp\obj\Debug\AcademiaApp.csprojResolveAssemblyReference.cache
+D:\Progra\AcademiaApp\AcademiaApp\obj\Debug\AcademiaApp.EmployeeForm.resources
+D:\Progra\AcademiaApp\AcademiaApp\obj\Debug\AcademiaApp.MainForm.resources
+D:\Progra\AcademiaApp\AcademiaApp\obj\Debug\AcademiaApp.csproj.GenerateResource.Cache
+D:\Progra\AcademiaApp\AcademiaApp\obj\Debug\AcademiaApp.exe
+D:\Progra\AcademiaApp\AcademiaApp\obj\Debug\AcademiaApp.pdb

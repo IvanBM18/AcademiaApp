@@ -1,1 +1,1 @@
-1|Ivan|Barba Macias|2|0|29/12/2021 08:05:36 p. m.|010101|True*2|Briana Iesu|Barba Macias|3|-1|31/12/2021 01:38:40 a. m.|000011|True*
+1|Ivan|Barba Macias|2|0|29/12/2021 08:05:36 p. m.|010101|1110011|True*2|Briana Iesu|Barba Macias|3|2|31/12/2021 02:32:19 p. m.|100001|0000011|True*3|Ricardo|Gazcon|6|4|06/01/2022 03:35:37 p. m.|001010|1111101|True*

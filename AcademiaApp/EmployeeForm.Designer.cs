@@ -65,6 +65,8 @@ namespace AcademiaApp
 			this.label9 = new System.Windows.Forms.Label();
 			this.textBoxMinimumDays = new System.Windows.Forms.TextBox();
 			this.label10 = new System.Windows.Forms.Label();
+			this.buttonHelp = new System.Windows.Forms.Button();
+			this.label11 = new System.Windows.Forms.Label();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.SuspendLayout();
@@ -76,31 +78,31 @@ namespace AcademiaApp
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(191, 30);
 			this.label1.TabIndex = 0;
-			this.label1.Text = "Datos del Empleado";
+			this.label1.Text = "Lista de Empleados";
 			// 
 			// treeViewE
 			// 
 			this.treeViewE.Location = new System.Drawing.Point(13, 35);
 			this.treeViewE.Name = "treeViewE";
-			this.treeViewE.Size = new System.Drawing.Size(190, 488);
+			this.treeViewE.Size = new System.Drawing.Size(190, 456);
 			this.treeViewE.TabIndex = 1;
 			this.treeViewE.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TreeViewENodeMouseClick);
 			// 
 			// buttonClear
 			// 
 			this.buttonClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.buttonClear.Location = new System.Drawing.Point(308, 14);
+			this.buttonClear.Location = new System.Drawing.Point(457, 14);
 			this.buttonClear.Name = "buttonClear";
-			this.buttonClear.Size = new System.Drawing.Size(143, 58);
+			this.buttonClear.Size = new System.Drawing.Size(96, 58);
 			this.buttonClear.TabIndex = 3;
-			this.buttonClear.Text = "Nuevo/Limpiar";
+			this.buttonClear.Text = "Limpiar";
 			this.buttonClear.UseVisualStyleBackColor = true;
 			this.buttonClear.Click += new System.EventHandler(this.ButtonClearClick);
 			// 
 			// buttonDelete
 			// 
 			this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.buttonDelete.Location = new System.Drawing.Point(457, 14);
+			this.buttonDelete.Location = new System.Drawing.Point(355, 14);
 			this.buttonDelete.Name = "buttonDelete";
 			this.buttonDelete.Size = new System.Drawing.Size(96, 58);
 			this.buttonDelete.TabIndex = 4;
@@ -389,7 +391,7 @@ namespace AcademiaApp
 									"Domingo"});
 			this.checkedListBoxWorkDays.Location = new System.Drawing.Point(210, 284);
 			this.checkedListBoxWorkDays.Name = "checkedListBoxWorkDays";
-			this.checkedListBoxWorkDays.Size = new System.Drawing.Size(143, 236);
+			this.checkedListBoxWorkDays.Size = new System.Drawing.Size(143, 207);
 			this.checkedListBoxWorkDays.TabIndex = 21;
 			this.checkedListBoxWorkDays.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.CheckedListBoxWorkDaysItemCheck);
 			// 
@@ -408,7 +410,7 @@ namespace AcademiaApp
 									"Domingo"});
 			this.checkedListBoxOffDays.Location = new System.Drawing.Point(559, 284);
 			this.checkedListBoxOffDays.Name = "checkedListBoxOffDays";
-			this.checkedListBoxOffDays.Size = new System.Drawing.Size(143, 236);
+			this.checkedListBoxOffDays.Size = new System.Drawing.Size(143, 207);
 			this.checkedListBoxOffDays.TabIndex = 22;
 			this.checkedListBoxOffDays.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.CheckedListBoxOffDaysItemCheck);
 			// 
@@ -432,17 +434,40 @@ namespace AcademiaApp
 			// label10
 			// 
 			this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label10.Location = new System.Drawing.Point(209, 29);
+			this.label10.Location = new System.Drawing.Point(247, 2);
 			this.label10.Name = "label10";
 			this.label10.Size = new System.Drawing.Size(102, 30);
 			this.label10.TabIndex = 25;
 			this.label10.Text = "Opciones:";
 			// 
+			// buttonHelp
+			// 
+			this.buttonHelp.BackColor = System.Drawing.Color.Sienna;
+			this.buttonHelp.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+			this.buttonHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.buttonHelp.Location = new System.Drawing.Point(406, 433);
+			this.buttonHelp.Name = "buttonHelp";
+			this.buttonHelp.Size = new System.Drawing.Size(96, 58);
+			this.buttonHelp.TabIndex = 26;
+			this.buttonHelp.Text = "Ayuda";
+			this.buttonHelp.UseVisualStyleBackColor = false;
+			// 
+			// label11
+			// 
+			this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label11.Location = new System.Drawing.Point(209, 54);
+			this.label11.Name = "label11";
+			this.label11.Size = new System.Drawing.Size(144, 18);
+			this.label11.TabIndex = 27;
+			this.label11.Text = "Datos del empleado:";
+			// 
 			// EmployeeForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(714, 535);
+			this.ClientSize = new System.Drawing.Size(714, 500);
+			this.Controls.Add(this.label11);
+			this.Controls.Add(this.buttonHelp);
 			this.Controls.Add(this.label10);
 			this.Controls.Add(this.textBoxMinimumDays);
 			this.Controls.Add(this.label9);
@@ -468,12 +493,14 @@ namespace AcademiaApp
 			this.Controls.Add(this.treeViewE);
 			this.Controls.Add(this.label1);
 			this.Name = "EmployeeForm";
-			this.Text = "EmployeeForm";
+			this.Text = "Empleados";
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox2.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.Windows.Forms.Label label11;
+		private System.Windows.Forms.Button buttonHelp;
 		private System.Windows.Forms.Label label10;
 		private System.Windows.Forms.TextBox textBoxMinimumDays;
 		private System.Windows.Forms.Label label9;

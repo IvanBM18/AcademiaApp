@@ -1,15 +1,15 @@
 ﻿//Date: 31/12/2021
 using System;
-using System.IO;
-using System.Collections.Generic;
+using System.IO; //Manejo de Archivos
+using System.Reflection;
+using System.Collections.Generic; //TDA
 using System.Drawing;
 using System.Windows.Forms;
 
 //Boton de Dudas
-//Minimo de dias
 //AutoAsignar Id
-//Cuando se selecciona domingo como laboral, se deselecciona de dia libre y al reves
-//Boton Limpiar/Nuevo
+//Diseño
+
 
 namespace AcademiaApp{
 	public partial class EmployeeForm : Form{
@@ -63,6 +63,13 @@ namespace AcademiaApp{
 				
 			}
 			selectedEmployee = false;
+			buttonSave.Text = "Añadir Nuevo";
+			
+			//Generacion de Imagenes
+			Assembly myAssembly = Assembly.GetExecutingAssembly();
+			Stream myStream = myAssembly.GetManifestResourceStream( "AcademiaApp.src.helpButton.png" );
+			Bitmap bmp = new Bitmap( myStream );
+			buttonHelp.Image = bmp;
 		}
 		
 //Interfaz Grafica
@@ -80,37 +87,7 @@ namespace AcademiaApp{
 				//Eliminamos de la lista y del treeview
 				foreach (Employee eI in employeeList) {
 					if(eI.iD == int.Parse(textBoxID.Text)){
-						//Eliminamos del archivo
-						File.Create("backup.txt");
-						read = new StreamReader(pathFile);
-						write = new StreamWriter("backup.txt");
-						string[] registers = read.ReadLine().Split('*');
-						foreach (string reg in registers) { //Pasamos casi toda la info al archivo de respaldo
-							if(reg.Length > 2)
-								if(int.Parse(reg.Split('|')[0]) != eI.iD)
-									write.Write(reg);
-						}
-						read.Close();
-						write.Close();
-						
-						write = new StreamWriter(pathFile);
-						read = new StreamReader("backup.txt");
-						write.Write(read.ReadLine());
-						
-						read.Close();
-						write.Close();
-						File.Delete("backup.txt");
-						
-						//Eliminamos de la lista
-						employeeList.Remove(eI);
-						
-						//Eliminamos del treeView
-						treeViewE.BeginUpdate();
-						treeViewE.Nodes.Clear();
-						foreach (Employee eJ in employeeList) {
-							treeViewE.Nodes.Add(eJ.ToString());
-						}
-						treeViewE.EndUpdate();
+						deleteEmployee(eI);
 						break;
 					}
 				}
@@ -128,6 +105,9 @@ namespace AcademiaApp{
 				
 				//Checar primero si no existe el empleado
 				if(myE != null){
+					//Añadimos a la Lista
+					employeeList.Add(myE);
+					
 					//Actualizamos treeView
 					treeViewE.BeginUpdate();
 					treeViewE.Nodes.Add(myE.ToString());
@@ -135,11 +115,38 @@ namespace AcademiaApp{
 					
 					//Añadimos al archivo
 					append = File.AppendText(pathFile);
-					append.WriteLine(myE.toFile());
+					append.Write(myE.toFile());
 					append.Close();
 				}
+				
 				selectedEmployee = true;
 			}else{ //Edicion de empleado ya existente
+				try {
+					foreach (Employee eI in employeeList){
+						if(eI.iD == int.Parse(textBoxID.Text)){
+							deleteEmployee(eI);
+							Employee myE = generateEmployee();
+							
+							//Añadimos a la Lista
+							employeeList.Add(myE);
+							
+							//Actualizamos treeView
+							treeViewE.BeginUpdate();
+							treeViewE.Nodes.Add(myE.ToString());
+							treeViewE.EndUpdate();
+							
+							//Añadimos al archivo
+							append = File.AppendText(pathFile);
+							append.Write(myE.toFile());
+							append.Close();
+							return;
+						}
+					}
+					
+				} catch (FormatException) {
+					MessageBox.Show("[ERROR] ID invalido");
+					throw;
+				}
 				return;
 			}
 		}
@@ -169,8 +176,9 @@ namespace AcademiaApp{
 				checkedListBoxOffDays.SetItemChecked(e.Index,false);
 		}
 		
+
 //Metodos del Form
-		//Generacion de Empleado
+		//Creacion de Empleado
 		Employee generateEmployee(){
 			Employee myE = new Employee();
 			
@@ -237,22 +245,28 @@ namespace AcademiaApp{
 				if(item.ToString() == "Lunes"){
 					myE.workDays[(int)days.INDX_MONDAY] = true;
 					continue;
-				}else if(item.ToString() == "Martes"){
+				}
+				if(item.ToString() == "Martes"){
 					myE.workDays[(int)days.INDX_TUESDAY] = true;
 					continue;
-				}else if(item.ToString() == "Miercoles"){
+				}
+				if(item.ToString() == "Miercoles"){
 					myE.workDays[(int)days.INDX_WEDNESDAY] = true;
 					continue;
-				}else if(item.ToString() == "Jueves"){
+				}
+				if(item.ToString() == "Jueves"){
 					myE.workDays[(int)days.INDX_THURSDAY] = true;
 					continue;
-				}else if(item.ToString() == "Viernes"){
+				}
+				if(item.ToString() == "Viernes"){
 					myE.workDays[(int)days.INDX_FRIDAY] = true;
 					continue;
-				}else if(item.ToString() == "Sabado"){
+				}
+				if(item.ToString() == "Sabado"){
 					myE.workDays[(int)days.INDX_SATURDAY] = true;
 					continue;
-				}else if(item.ToString() == "Domingo"){
+				}
+				if(item.ToString() == "Domingo"){
 					myE.workDays[(int)days.INDX_SUNDAY] = true;
 					continue;
 				}
@@ -291,6 +305,39 @@ namespace AcademiaApp{
 			}
 			
 			return myE;
+		}
+		
+		//Emliminar Empleado
+		void deleteEmployee(Employee eI){
+			//Eliminamos del archivo
+			read = new StreamReader(pathFile);
+			write = new StreamWriter("backup.txt");
+			string[] registers = read.ReadLine().Split('*');
+			foreach (string reg in registers) { //Pasamos casi toda la info al archivo de respaldo
+				if(reg.Length > 2)
+					if(int.Parse(reg.Split('|')[0]) != eI.iD)
+						write.Write(reg + "*");
+			}
+			read.Close();
+			write.Close();
+			
+			write = new StreamWriter(pathFile);
+			read = new StreamReader("backup.txt");
+			write.Write(read.ReadLine());
+			
+			read.Close();
+			write.Close();
+			
+			//Eliminamos de la lista
+			employeeList.Remove(eI);
+			
+			//Eliminamos del treeView
+			treeViewE.BeginUpdate();
+			treeViewE.Nodes.Clear();
+			foreach (Employee eJ in employeeList) {
+				treeViewE.Nodes.Add(eJ.ToString());
+			}
+			treeViewE.EndUpdate();
 		}
 		
 		//Generacion de listas de Empleados
@@ -365,6 +412,7 @@ namespace AcademiaApp{
 					default:
 						break;
 				}
+				buttonSave.Text = "Guardar Cambios";
 			}
 			
 			//Check Dia laboral Preferido
@@ -391,7 +439,7 @@ namespace AcademiaApp{
 			
 			//Check DiasDescanso
 			for(int i = 0; i < eI.offDays.Length; i++){
-				if(eI.workDays[i])
+				if(eI.offDays[i])
 					checkedListBoxOffDays.SetItemChecked(i,true);
 				else
 					checkedListBoxOffDays.SetItemChecked(i,false);
@@ -429,9 +477,13 @@ namespace AcademiaApp{
 				checkedListBoxOffDays.SetItemChecked(i,false);
 			}
 			selectedEmployee = false;
+			buttonSave.Text = "Añadir Nuevo";
 		}
 		
-		
+		//Getter de la Lista
+		public List<Employee> EmployeeList {
+			get { return employeeList; }
+		}
 		
 	}
 }

@@ -43,7 +43,18 @@ namespace AcademiaApp{
 						jobPositions[i] = false;
 				}
 				
-				if(fields[7] == "True*" || fields[7] == "True")
+				positions = fields[7];
+				for(int i = 0;i < positions.Length; i++){
+					if(positions[i] == '1'){
+						workDays[i] = true;
+						offDays[i] = false;
+					}else{
+						workDays[i] = false;
+						offDays[i] = true;
+					}
+				}
+					
+				if(fields[8] == "True*" || fields[8] == "True")
 					status = true;
 				else
 					status = false;
@@ -57,13 +68,14 @@ namespace AcademiaApp{
 		}
 		
 		public string toFile(){
-			return iD.ToString() + "|" + name + "|" + lastName + "|" + minimumWorkDays.ToString() + "|" +
-				entryDate.ToString() + "|" + this.positionsToBin() + "|" + status.ToString() + "*";
+			return iD.ToString() + "|" + name + "|" + lastName + "|" + minimumWorkDays.ToString() + "|" + defaultPosition.ToString()
+				+ "|" + entryDate.ToString() + "|" + boolToBin(jobPositions) + "|" + boolToBin(workDays) + "|"   
+				+ status.ToString() + "*";
 		}
 		
-		public string positionsToBin(){
+		public string boolToBin(bool[] bArray){
 			string result = "";
-			foreach (bool bI in jobPositions) {
+			foreach (bool bI in bArray) {
 				if(bI)
 					result += "1";
 				else

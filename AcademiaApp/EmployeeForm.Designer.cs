@@ -216,9 +216,9 @@ namespace AcademiaApp
 			// 
 			this.groupBox1.Controls.Add(this.checkBoxComodin);
 			this.groupBox1.Controls.Add(this.checkBoxCaja);
+			this.groupBox1.Controls.Add(this.checkBoxMixto);
 			this.groupBox1.Controls.Add(this.checkBoxCocina);
 			this.groupBox1.Controls.Add(this.checkBoxBarra);
-			this.groupBox1.Controls.Add(this.checkBoxMixto);
 			this.groupBox1.Controls.Add(this.checkBoxMesero);
 			this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.groupBox1.Location = new System.Drawing.Point(210, 141);
@@ -248,7 +248,7 @@ namespace AcademiaApp
 			// 
 			// checkBoxCocina
 			// 
-			this.checkBoxCocina.Location = new System.Drawing.Point(241, 21);
+			this.checkBoxCocina.Location = new System.Drawing.Point(175, 21);
 			this.checkBoxCocina.Name = "checkBoxCocina";
 			this.checkBoxCocina.Size = new System.Drawing.Size(104, 24);
 			this.checkBoxCocina.TabIndex = 3;
@@ -257,7 +257,7 @@ namespace AcademiaApp
 			// 
 			// checkBoxBarra
 			// 
-			this.checkBoxBarra.Location = new System.Drawing.Point(175, 21);
+			this.checkBoxBarra.Location = new System.Drawing.Point(117, 21);
 			this.checkBoxBarra.Name = "checkBoxBarra";
 			this.checkBoxBarra.Size = new System.Drawing.Size(104, 24);
 			this.checkBoxBarra.TabIndex = 2;
@@ -266,7 +266,7 @@ namespace AcademiaApp
 			// 
 			// checkBoxMixto
 			// 
-			this.checkBoxMixto.Location = new System.Drawing.Point(117, 21);
+			this.checkBoxMixto.Location = new System.Drawing.Point(247, 22);
 			this.checkBoxMixto.Name = "checkBoxMixto";
 			this.checkBoxMixto.Size = new System.Drawing.Size(104, 24);
 			this.checkBoxMixto.TabIndex = 1;
@@ -286,9 +286,9 @@ namespace AcademiaApp
 			// 
 			this.groupBox2.Controls.Add(this.radioButtonComodin);
 			this.groupBox2.Controls.Add(this.radioButtonCaja);
+			this.groupBox2.Controls.Add(this.radioButtonMixto);
 			this.groupBox2.Controls.Add(this.radioButtonCocina);
 			this.groupBox2.Controls.Add(this.radioButtonBarra);
-			this.groupBox2.Controls.Add(this.radioButtonMixto);
 			this.groupBox2.Controls.Add(this.radioButtonMesero);
 			this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.groupBox2.Location = new System.Drawing.Point(209, 201);
@@ -320,9 +320,9 @@ namespace AcademiaApp
 			// 
 			// radioButtonCocina
 			// 
-			this.radioButtonCocina.Location = new System.Drawing.Point(242, 21);
+			this.radioButtonCocina.Location = new System.Drawing.Point(176, 21);
 			this.radioButtonCocina.Name = "radioButtonCocina";
-			this.radioButtonCocina.Size = new System.Drawing.Size(104, 24);
+			this.radioButtonCocina.Size = new System.Drawing.Size(82, 24);
 			this.radioButtonCocina.TabIndex = 18;
 			this.radioButtonCocina.TabStop = true;
 			this.radioButtonCocina.Text = "Cocina";
@@ -330,7 +330,7 @@ namespace AcademiaApp
 			// 
 			// radioButtonBarra
 			// 
-			this.radioButtonBarra.Location = new System.Drawing.Point(176, 21);
+			this.radioButtonBarra.Location = new System.Drawing.Point(118, 21);
 			this.radioButtonBarra.Name = "radioButtonBarra";
 			this.radioButtonBarra.Size = new System.Drawing.Size(104, 24);
 			this.radioButtonBarra.TabIndex = 18;
@@ -340,7 +340,7 @@ namespace AcademiaApp
 			// 
 			// radioButtonMixto
 			// 
-			this.radioButtonMixto.Location = new System.Drawing.Point(118, 21);
+			this.radioButtonMixto.Location = new System.Drawing.Point(248, 21);
 			this.radioButtonMixto.Name = "radioButtonMixto";
 			this.radioButtonMixto.Size = new System.Drawing.Size(104, 24);
 			this.radioButtonMixto.TabIndex = 1;

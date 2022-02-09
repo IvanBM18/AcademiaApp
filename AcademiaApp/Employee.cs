@@ -8,6 +8,7 @@ namespace AcademiaApp{
 		public int minimumWorkDays{get;set;} //Dias laborales minimos
 		public bool[] jobPositions {get;set;} //Arreglo para ver que posiciones puede ejercer
 		public int defaultPosition {get;set;} //Inidice del puesto predeterminado(para en caso de ser necesario colocar mas)?
+		public int actualDays{get;set;}
 		
 		public int iD{get;set;} //Identificador de trabajador
 		public bool status{get;set;} //Active Inactive
@@ -23,6 +24,7 @@ namespace AcademiaApp{
 			entryDate = new DateTime();
 			entryDate = DateTime.Now;
 			defaultPosition = -1;
+			iD = -1;
 		}
 		
 		public Employee fromString(string register){
@@ -84,7 +86,9 @@ namespace AcademiaApp{
 			return result;
 		}
 		
-		
+		public bool canWorkPosition(int posIndx){
+			return jobPositions[posIndx];
+		}
 
 	}
 }

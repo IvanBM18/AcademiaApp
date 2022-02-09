@@ -6,13 +6,17 @@ using System.Drawing;
 using System.Windows.Forms;
 
 
+//Trabajo Actual: PreBeta 
+//Mejorar Visualizacion del Header de la tabla (Crear clase semana tal vez?)
+//Requerido generar opciones antes de crear el horario
+//Pre Beta: Intercambio de trabajos para intentar que todos tengan sus dias(ordenar por menos dias laborales?)
+//Intercambio si 1 persona con puesto x trabaja en el preferido de otro el mismo dia
+//Intercambio cuando alguien como mixto trabaja mas de 2 dias de lo normal(quitaselo alv)
+
+//Post BETA->
 //Miniform o apartado para el calculo de la propina
 //Miniform para ver datos sobre el horario actual
-//(Extra)Poder arrstrar empleados al horario
-//Para el horario tomar primero las personas con dias minimos de mayor a menor, tomando si es posible su puesto preferido
-//Cuando hacen falta personas, pero no hay personal disponible, dejarlo en blanco o poner de las personas con menos dias?
-//Pasar Acciones
-//CASO: Si puedes dame el lunes sino no pasa nada
+//Post Beta: Max Dias, Boton Dudas, Hacerlo mas Bonito, funcion comodin.
 
 namespace AcademiaApp{
 	public partial class MainForm : Form
@@ -43,33 +47,125 @@ namespace AcademiaApp{
 			INDX_SUNDAY
 		}
 		
+		//Enumerado para posiciones
+		enum positions{ //Mes->Mixto->Barra->Cocina
+			INDX_MESERO ,
+			INDX_BARRA,
+			INDX_COCINA,
+			INDX_MIXTO,
+			INDX_CAJA,
+			INDX_COMODIN
+		}
+		
 		public MainForm(){
 			InitializeComponent();
-			dataGridSchedule.DefaultCellStyle.Font = new Font("Arial", 9);
+			dataGridSchedule.DefaultCellStyle.Font = new Font("Georgia", 13);
 			employeeAdmin = new EmployeeForm();
+			for(int i = dataGridSchedule.Rows.Count; i < 7; i++){
+				dataGridSchedule.Rows.Add();
+			}
 			
 		}
 		
 		//Interfaz
 		void ButtonEmployeeClick(object sender, EventArgs e){
+			try {
+				employeeAdmin.ShowDialog();
+			} catch (Exception) {
+				employeeAdmin = new EmployeeForm();
+				employeeAdmin.ShowDialog();
+				throw;
+			}
 			
-			employeeAdmin.Show();
 			eL = employeeAdmin.EmployeeList;
 		}
 		
 		//Generar Horario
 		void ButtonScheduleClick(object sender, EventArgs e){
+			comod = radioButtonYes.Checked;
 			week = generateWeek();
 			eL = employeeAdmin.EmployeeList;
+			//Variables aux
+			int nMeseros,nCocina,nMixto,nBarra;
+			
 			if(eL.Count <= 2){
 				eL = generateList();
 			}
 			sortListByDays();
+			
+			//Iniciamos a Generar el Horario
+			
+			//Asginacion de empleados a sus dias
 			foreach (Employee eI in eL) {
 				if(!eI.status)
 					continue;
+				//Ciclar una vez para su dia preferido, otra para ver donde lo podemos poner
+				for(int i = 0;i < week.Length;i++){
+					if(eI.actualDays == eI.minimumWorkDays)
+						break;
+					if(eI.workDays[i]){ //Si puede trabajar Hoy
+						//Obtenemos los dias disponibles
+						//Tratamos primero con su posicion por default
+						tryWork(eI,week[i],eI.defaultPosition);
+						
+					}
+				}
+				
+				//Cicla para ver en donde lo podemos poner tomando en cuenta su minimo de dias como maximo
+				for(int i = 0;i < week.Length;i++){
+					if(eI.actualDays == eI.minimumWorkDays)
+						break;
+					if(eI.workDays[i]){ //Si puede trabajar Hoy
+						//Aqui debera de tratar de ponerlo trabajar en cualquier posicion que tenga
+						for (int j = 0; j < 6; j++) {
+							if(eI.jobPositions[j])
+								tryWork(eI,week[i],j);
+						}
+						
+					}
+				}
+			}
+			
+			//Trataremos de llenar huecos
+			for (int i = 0; i < week.Length; i++) {
+				//El dia no esta lleno
+				if(!week[i].isFull()){
+					if(week[i].mesero.Count < week[i].maxMesero){
+						foreach (Employee eI in eL) {
+							if(eI.workDays[i])
+								tryWork(eI,week[i],(int)positions.INDX_MESERO);
+						}
+					}
+					if(week[i].mixto.Count < week[i].maxMixto){
+						foreach (Employee eI in eL) {
+							if(eI.workDays[i])
+								tryWork(eI,week[i],(int)positions.INDX_MIXTO);
+						}
+					}
+					if(week[i].barra.Count < week[i].maxBarra){
+						foreach (Employee eI in eL) {
+							if(eI.workDays[i])
+								tryWork(eI,week[i],(int)positions.INDX_BARRA);
+						}
+					}
+					if(week[i].cocina.Count < week[i].maxCocina){
+						foreach (Employee eI in eL) {
+							if(eI.workDays[i])
+								tryWork(eI,week[i],(int)positions.INDX_COCINA);
+						}
+					}
+					if(week[i].caja.iD == -1){
+						foreach (Employee eI in eL) {
+							if(eI.workDays[i])
+								tryWork(eI,week[i],(int)positions.INDX_CAJA);
+						}
+					}
+				}
 				
 			}
+			
+			
+			updateDataView();
 		}
 		
 //Metodos Generales
@@ -81,7 +177,6 @@ namespace AcademiaApp{
 			}
 			w = new WorkDay[7];
 			//Lunes
-			
 			w[(int)days.INDX_MONDAY] = new WorkDay(numericMesL.Value,numericCocL.Value, numericBarrL.Value, numericMixL.Value, comod);
 			//Martes
 			w[(int)days.INDX_TUESDAY] = new WorkDay(numericMesM.Value,numericCocM.Value, numericBarrM.Value, numericMixM.Value, comod);
@@ -139,7 +234,81 @@ namespace AcademiaApp{
 			
 		}
 		
+		//Ver si el empleado puede trabajar el dia en la posicion deseada 
+		bool tryWork(Employee eI, WorkDay day, int position){
+			int capp;//Limite
+			if(!eI.canWorkPosition(position) || !day.canWorkEmployee(eI))
+				return false;
+			if(position == (int)positions.INDX_MESERO){
+				if(day.mesero.Count < day.maxMesero){
+					day.mesero.Add(eI);
+					eI.actualDays++;
+					return true;
+				}
+			}else if(position == (int)positions.INDX_BARRA){
+				if(day.barra.Count < day.maxBarra){
+					day.barra.Add(eI);
+					eI.actualDays++;
+					return true;
+				}
+			}else if(position == (int)positions.INDX_COCINA){
+				if(day.cocina.Count < day.maxCocina){
+					day.cocina.Add(eI);
+					eI.actualDays++;
+					return true;
+				}
+			}else if(position == (int)positions.INDX_MIXTO){
+				if(day.mixto.Count < day.maxMixto){
+					day.mixto.Add(eI);
+					eI.actualDays++;
+					return true;
+				}
+			}else if(position == (int)positions.INDX_CAJA){
+				if(day.caja != null){
+					day.caja = eI;
+					eI.actualDays++;
+					return true;
+				}
+			}else if(position == (int)positions.INDX_COMODIN && comod){
+				if(day.comodin != null){
+					day.comodin = eI;
+					eI.actualDays++;
+					return true;
+				}
+			}
+			return false;
+			
+		}
 		
+		//Actualiza la DataViewGrid
+		void updateDataView(){
+//			int nRow,day;
+//			
+//			nRow = (int)positions.INDX_MESERO;
+//			//Insertamos Mesero
+//			dataGridSchedule.Rows[nRow].Cells[(int)days.INDX_MONDAY].Value = week[(int)days.INDX_MONDAY].listToString(nRow);
+//			dataGridSchedule.Rows[nRow].Cells[(int)days.INDX_TUESDAY].Value = week[(int)days.INDX_TUESDAY].listToString(nrow);
+//			dataGridSchedule.Rows[nRow].Cells[(int)days.INDX_WEDNESDAY].Value = week[(int)days.INDX_WEDNESDAY].listToString(nrow);
+//			dataGridSchedule.Rows[nRow].Cells[(int)days.INDX_THURSDAY].Value = week[(int)days.INDX_THURSDAY].listToString(nrow);
+//			dataGridSchedule.Rows[nRow].Cells[(int)days.INDX_FRIDAY].Value = week[(int)days.INDX_FRIDAY].listToString(nrow);
+//			dataGridSchedule.Rows[nRow].Cells[(int)days.INDX_SATURDAY].Value = week[(int)days.INDX_SATURDAY].listToString(nrow);
+//			dataGridSchedule.Rows[nRow].Cells[(int)days.INDX_SUNDAY].Value = week[(int)days.INDX_SUNDAY].listToString(nrow);
+//			
+//			//Insertamos Barra
+//			nRow = (int)positions.INDX_BARRA;
+//			dataGridSchedule.Rows[nRow].Cells[(int)days.INDX_MONDAY].Value = week[(int)days.INDX_MONDAY].listToString(nRow);
+//			dataGridSchedule.Rows[nRow].Cells[(int)days.INDX_TUESDAY].Value = week[(int)days.INDX_TUESDAY].listToString(nRow);
+//			dataGridSchedule.Rows[nRow].Cells[(int)days.INDX_WEDNESDAY].Value = week[(int)days.INDX_WEDNESDAY].listToString(nRow);
+//			dataGridSchedule.Rows[nRow].Cells[(int)days.INDX_THURSDAY].Value = week[(int)days.INDX_THURSDAY].listToString(nRow);
+//			dataGridSchedule.Rows[nRow].Cells[(int)days.INDX_FRIDAY].Value = week[(int)days.INDX_FRIDAY].listToString(nRow);
+//			dataGridSchedule.Rows[nRow].Cells[(int)days.INDX_SATURDAY].Value = week[(int)days.INDX_SATURDAY].listToString(nRow);
+//			dataGridSchedule.Rows[nRow].Cells[(int)days.INDX_SUNDAY].Value = week[(int)days.INDX_SUNDAY].listToString(nRow);
+			for (int iDay = 0; iDay <= (int)days.INDX_SUNDAY; iDay++) {
+				for(int jRole = 0 ;jRole <= (int)positions.INDX_COMODIN;jRole++){
+					dataGridSchedule.Rows[jRole].Cells[iDay].Value = week[iDay].listToString(jRole);
+				}
+			}
+		}
 	}
 }
 

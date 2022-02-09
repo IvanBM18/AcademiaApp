@@ -6,9 +6,11 @@ using System.Collections.Generic; //TDA
 using System.Drawing;
 using System.Windows.Forms;
 
+//Post Beta: no reiniciar al cometer error
 //Boton de Dudas
 //AutoAsignar Id
 //Diseño
+
 
 
 namespace AcademiaApp{
@@ -26,11 +28,11 @@ namespace AcademiaApp{
 		}
 		
 		//Enumerado para posiciones
-		enum positions{
-			INDX_MESERO ,
-			INDX_MIXTO,
+		enum positions{ //Mes->Mixto->Barra->Cocina
+			INDX_MESERO,
 			INDX_BARRA,
 			INDX_COCINA,
+			INDX_MIXTO,
 			INDX_CAJA,
 			INDX_COMODIN
 		}
@@ -76,6 +78,7 @@ namespace AcademiaApp{
 		//Añadir Empleados
 		void ButtonClearClick(object sender, EventArgs e){
 			clearAll();
+			treeViewE.Sort();
 		}
 		
 		//Eliminar Empleados
@@ -119,7 +122,9 @@ namespace AcademiaApp{
 					append.Close();
 				}
 				
-				selectedEmployee = true;
+				clearAll();
+				selectedEmployee = false;
+				
 			}else{ //Edicion de empleado ya existente
 				try {
 					foreach (Employee eI in employeeList){
@@ -213,12 +218,12 @@ namespace AcademiaApp{
 			//Asignacion de puestos
 			if(checkBoxMesero.Checked)
 				myE.jobPositions[(int)positions.INDX_MESERO] = true;
-			if(checkBoxMixto.Checked)
-				myE.jobPositions[(int)positions.INDX_MIXTO] = true;
 			if(checkBoxBarra.Checked)
 				myE.jobPositions[(int)positions.INDX_BARRA] = true;
 			if(checkBoxCocina.Checked)
 				myE.jobPositions[(int)positions.INDX_COCINA] = true;
+			if(checkBoxMixto.Checked)
+				myE.jobPositions[(int)positions.INDX_MIXTO] = true;
 			if(checkBoxCaja.Checked)
 				myE.jobPositions[(int)positions.INDX_CAJA] = true;
 			if(checkBoxComodin.Checked)
@@ -227,12 +232,12 @@ namespace AcademiaApp{
 			//Asignacion de puesto Preferido
 			if(radioButtonMesero.Checked)
 				myE.defaultPosition = (int)positions.INDX_MESERO;
-			else if(radioButtonMixto.Checked)
-				myE.defaultPosition = (int)positions.INDX_MIXTO;
 			else if(radioButtonBarra.Checked)
 				myE.defaultPosition = (int)positions.INDX_BARRA;
 			else if(radioButtonCocina.Checked)
 				myE.defaultPosition = (int)positions.INDX_COCINA;
+			else if(radioButtonMixto.Checked)
+				myE.defaultPosition = (int)positions.INDX_MIXTO;
 			else if(radioButtonCaja.Checked)
 				myE.defaultPosition = (int)positions.INDX_CAJA;
 			else if(radioButtonComodin.Checked)
@@ -379,23 +384,23 @@ namespace AcademiaApp{
 						else
 							checkBoxMesero.Checked = false;
 						break;
-					case 1://Mixto
-						if(eI.jobPositions[i])
-							checkBoxMixto.Checked = true;
-						else
-							checkBoxMixto.Checked = false;
-						break;
-					case 2://Barra
+					case 1://Barra
 						if(eI.jobPositions[i])
 							checkBoxBarra.Checked = true;
 						else
 							checkBoxBarra.Checked = false;
 						break;
-					case 3://Cocina
+					case 2://Cocina
 						if(eI.jobPositions[i])
 							checkBoxCocina.Checked = true;
 						else
 							checkBoxCocina.Checked = false;
+						break;
+					case 3://Mixto
+						if(eI.jobPositions[i])
+							checkBoxMixto.Checked = true;
+						else
+							checkBoxMixto.Checked = false;
 						break;
 					case 4://Caja
 						if(eI.jobPositions[i])
@@ -418,12 +423,12 @@ namespace AcademiaApp{
 			//Check Dia laboral Preferido
 			if(eI.defaultPosition == (int)positions.INDX_MESERO)
 				radioButtonMesero.Checked = true;
-			else if(eI.defaultPosition == (int)positions.INDX_MIXTO)
-				radioButtonMixto.Checked = true;
 			else if(eI.defaultPosition == (int)positions.INDX_BARRA)
 				radioButtonBarra.Checked = true;
 			else if(eI.defaultPosition == (int)positions.INDX_COCINA)
 				radioButtonCocina.Checked = true;
+			else if(eI.defaultPosition == (int)positions.INDX_MIXTO)
+				radioButtonMixto.Checked = true;
 			else if(eI.defaultPosition == (int)positions.INDX_CAJA)
 				radioButtonCaja.Checked = true;
 			else if(eI.defaultPosition == (int)positions.INDX_COMODIN)
@@ -485,5 +490,9 @@ namespace AcademiaApp{
 			get { return employeeList; }
 		}
 		
+		//Orden TreeView
+		void sortTreeView(){
+			treeViewE.Sort();
+		}
 	}
 }

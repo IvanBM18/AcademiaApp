@@ -29,6 +29,13 @@ namespace AcademiaApp
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.buttonSchedule = new System.Windows.Forms.Button();
 			this.buttonEmployee = new System.Windows.Forms.Button();
 			this.buttonTip = new System.Windows.Forms.Button();
@@ -186,6 +193,7 @@ namespace AcademiaApp
 			// 
 			// dataGridSchedule
 			// 
+			this.dataGridSchedule.AllowUserToAddRows = false;
 			this.dataGridSchedule.AllowUserToOrderColumns = true;
 			this.dataGridSchedule.BackgroundColor = System.Drawing.Color.PeachPuff;
 			this.dataGridSchedule.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -201,12 +209,14 @@ namespace AcademiaApp
 			this.dataGridSchedule.Location = new System.Drawing.Point(4, 12);
 			this.dataGridSchedule.Name = "dataGridSchedule";
 			this.dataGridSchedule.RowTemplate.Height = 24;
-			this.dataGridSchedule.Size = new System.Drawing.Size(869, 320);
+			this.dataGridSchedule.Size = new System.Drawing.Size(1157, 320);
 			this.dataGridSchedule.TabIndex = 7;
 			// 
 			// Lunes
 			// 
 			this.Lunes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			dataGridViewCellStyle8.Font = new System.Drawing.Font("HP Simplified Hans", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.Lunes.DefaultCellStyle = dataGridViewCellStyle8;
 			this.Lunes.HeaderText = "Lunes";
 			this.Lunes.Name = "Lunes";
 			this.Lunes.Width = 72;
@@ -214,6 +224,8 @@ namespace AcademiaApp
 			// Martes
 			// 
 			this.Martes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			dataGridViewCellStyle9.Font = new System.Drawing.Font("HP Simplified Hans", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+			this.Martes.DefaultCellStyle = dataGridViewCellStyle9;
 			this.Martes.HeaderText = "Martes";
 			this.Martes.Name = "Martes";
 			this.Martes.Width = 76;
@@ -221,6 +233,8 @@ namespace AcademiaApp
 			// Miercoles
 			// 
 			this.Miercoles.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			dataGridViewCellStyle10.Font = new System.Drawing.Font("HP Simplified Hans", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.Miercoles.DefaultCellStyle = dataGridViewCellStyle10;
 			this.Miercoles.HeaderText = "Miercoles";
 			this.Miercoles.Name = "Miercoles";
 			this.Miercoles.Width = 93;
@@ -228,6 +242,8 @@ namespace AcademiaApp
 			// Jueves
 			// 
 			this.Jueves.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			dataGridViewCellStyle11.Font = new System.Drawing.Font("HP Simplified Hans", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+			this.Jueves.DefaultCellStyle = dataGridViewCellStyle11;
 			this.Jueves.HeaderText = "Jueves";
 			this.Jueves.Name = "Jueves";
 			this.Jueves.Width = 78;
@@ -235,6 +251,8 @@ namespace AcademiaApp
 			// Viernes
 			// 
 			this.Viernes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			dataGridViewCellStyle12.Font = new System.Drawing.Font("HP Simplified Hans", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+			this.Viernes.DefaultCellStyle = dataGridViewCellStyle12;
 			this.Viernes.HeaderText = "Viernes";
 			this.Viernes.Name = "Viernes";
 			this.Viernes.Width = 81;
@@ -242,6 +260,8 @@ namespace AcademiaApp
 			// Sabado
 			// 
 			this.Sabado.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			dataGridViewCellStyle13.Font = new System.Drawing.Font("HP Simplified Hans", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.Sabado.DefaultCellStyle = dataGridViewCellStyle13;
 			this.Sabado.HeaderText = "Sabado";
 			this.Sabado.Name = "Sabado";
 			this.Sabado.Width = 82;
@@ -249,6 +269,8 @@ namespace AcademiaApp
 			// Domingo
 			// 
 			this.Domingo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			dataGridViewCellStyle14.Font = new System.Drawing.Font("HP Simplified Hans", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+			this.Domingo.DefaultCellStyle = dataGridViewCellStyle14;
 			this.Domingo.HeaderText = "Domingo";
 			this.Domingo.Name = "Domingo";
 			this.Domingo.Width = 89;
@@ -256,38 +278,38 @@ namespace AcademiaApp
 			// radioButtonNo
 			// 
 			this.radioButtonNo.Checked = true;
-			this.radioButtonNo.Location = new System.Drawing.Point(1428, 315);
+			this.radioButtonNo.Location = new System.Drawing.Point(561, 703);
 			this.radioButtonNo.Name = "radioButtonNo";
 			this.radioButtonNo.Size = new System.Drawing.Size(104, 24);
-			this.radioButtonNo.TabIndex = 38;
+			this.radioButtonNo.TabIndex = 49;
 			this.radioButtonNo.TabStop = true;
 			this.radioButtonNo.Text = "No";
 			this.radioButtonNo.UseVisualStyleBackColor = true;
 			// 
 			// radioButtonYes
 			// 
-			this.radioButtonYes.Location = new System.Drawing.Point(1380, 315);
+			this.radioButtonYes.Location = new System.Drawing.Point(513, 703);
 			this.radioButtonYes.Name = "radioButtonYes";
 			this.radioButtonYes.Size = new System.Drawing.Size(104, 24);
-			this.radioButtonYes.TabIndex = 37;
+			this.radioButtonYes.TabIndex = 48;
 			this.radioButtonYes.Text = "Sí";
 			this.radioButtonYes.UseVisualStyleBackColor = true;
 			// 
 			// label1
 			// 
-			this.label1.Location = new System.Drawing.Point(1246, 315);
+			this.label1.Location = new System.Drawing.Point(379, 703);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(128, 23);
-			this.label1.TabIndex = 36;
+			this.label1.TabIndex = 47;
 			this.label1.Text = "Habilitar Comodin:";
 			// 
 			// label30
 			// 
 			this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label30.Location = new System.Drawing.Point(879, 9);
+			this.label30.Location = new System.Drawing.Point(12, 397);
 			this.label30.Name = "label30";
 			this.label30.Size = new System.Drawing.Size(365, 26);
-			this.label30.TabIndex = 35;
+			this.label30.TabIndex = 46;
 			this.label30.Text = "Ingrese el numero de trabajadores al dia:";
 			// 
 			// groupBox7
@@ -300,10 +322,10 @@ namespace AcademiaApp
 			this.groupBox7.Controls.Add(this.label27);
 			this.groupBox7.Controls.Add(this.label28);
 			this.groupBox7.Controls.Add(this.label29);
-			this.groupBox7.Location = new System.Drawing.Point(879, 311);
+			this.groupBox7.Location = new System.Drawing.Point(12, 699);
 			this.groupBox7.Name = "groupBox7";
 			this.groupBox7.Size = new System.Drawing.Size(307, 76);
-			this.groupBox7.TabIndex = 33;
+			this.groupBox7.TabIndex = 45;
 			this.groupBox7.TabStop = false;
 			this.groupBox7.Text = "Domingo";
 			// 
@@ -318,11 +340,6 @@ namespace AcademiaApp
 			this.numericMixD.Name = "numericMixD";
 			this.numericMixD.Size = new System.Drawing.Size(51, 22);
 			this.numericMixD.TabIndex = 7;
-			this.numericMixD.Value = new decimal(new int[] {
-									1,
-									0,
-									0,
-									0});
 			// 
 			// numericBarrD
 			// 
@@ -341,7 +358,7 @@ namespace AcademiaApp
 			this.numericBarrD.Size = new System.Drawing.Size(51, 22);
 			this.numericBarrD.TabIndex = 6;
 			this.numericBarrD.Value = new decimal(new int[] {
-									1,
+									2,
 									0,
 									0,
 									0});
@@ -363,7 +380,7 @@ namespace AcademiaApp
 			this.numericCocD.Size = new System.Drawing.Size(51, 22);
 			this.numericCocD.TabIndex = 5;
 			this.numericCocD.Value = new decimal(new int[] {
-									1,
+									2,
 									0,
 									0,
 									0});
@@ -432,10 +449,10 @@ namespace AcademiaApp
 			this.groupBox6.Controls.Add(this.label23);
 			this.groupBox6.Controls.Add(this.label24);
 			this.groupBox6.Controls.Add(this.label25);
-			this.groupBox6.Location = new System.Drawing.Point(1227, 220);
+			this.groupBox6.Location = new System.Drawing.Point(360, 608);
 			this.groupBox6.Name = "groupBox6";
 			this.groupBox6.Size = new System.Drawing.Size(307, 85);
-			this.groupBox6.TabIndex = 30;
+			this.groupBox6.TabIndex = 42;
 			this.groupBox6.TabStop = false;
 			this.groupBox6.Text = "Sabado";
 			// 
@@ -459,9 +476,24 @@ namespace AcademiaApp
 			// numericBarrS
 			// 
 			this.numericBarrS.Location = new System.Drawing.Point(162, 48);
+			this.numericBarrS.Maximum = new decimal(new int[] {
+									2,
+									0,
+									0,
+									0});
+			this.numericBarrS.Minimum = new decimal(new int[] {
+									1,
+									0,
+									0,
+									0});
 			this.numericBarrS.Name = "numericBarrS";
 			this.numericBarrS.Size = new System.Drawing.Size(51, 22);
 			this.numericBarrS.TabIndex = 6;
+			this.numericBarrS.Value = new decimal(new int[] {
+									1,
+									0,
+									0,
+									0});
 			// 
 			// numericCocS
 			// 
@@ -549,10 +581,10 @@ namespace AcademiaApp
 			this.groupBox5.Controls.Add(this.label19);
 			this.groupBox5.Controls.Add(this.label20);
 			this.groupBox5.Controls.Add(this.label21);
-			this.groupBox5.Location = new System.Drawing.Point(879, 220);
+			this.groupBox5.Location = new System.Drawing.Point(12, 608);
 			this.groupBox5.Name = "groupBox5";
 			this.groupBox5.Size = new System.Drawing.Size(307, 85);
-			this.groupBox5.TabIndex = 29;
+			this.groupBox5.TabIndex = 41;
 			this.groupBox5.TabStop = false;
 			this.groupBox5.Text = "Viernes";
 			// 
@@ -681,10 +713,10 @@ namespace AcademiaApp
 			this.groupBox4.Controls.Add(this.label15);
 			this.groupBox4.Controls.Add(this.label16);
 			this.groupBox4.Controls.Add(this.label17);
-			this.groupBox4.Location = new System.Drawing.Point(1227, 129);
+			this.groupBox4.Location = new System.Drawing.Point(360, 517);
 			this.groupBox4.Name = "groupBox4";
 			this.groupBox4.Size = new System.Drawing.Size(307, 85);
-			this.groupBox4.TabIndex = 32;
+			this.groupBox4.TabIndex = 44;
 			this.groupBox4.TabStop = false;
 			this.groupBox4.Text = "Jueves";
 			// 
@@ -708,9 +740,24 @@ namespace AcademiaApp
 			// numericBarrJ
 			// 
 			this.numericBarrJ.Location = new System.Drawing.Point(162, 48);
+			this.numericBarrJ.Maximum = new decimal(new int[] {
+									2,
+									0,
+									0,
+									0});
+			this.numericBarrJ.Minimum = new decimal(new int[] {
+									1,
+									0,
+									0,
+									0});
 			this.numericBarrJ.Name = "numericBarrJ";
 			this.numericBarrJ.Size = new System.Drawing.Size(51, 22);
 			this.numericBarrJ.TabIndex = 6;
+			this.numericBarrJ.Value = new decimal(new int[] {
+									1,
+									0,
+									0,
+									0});
 			// 
 			// numericCocJ
 			// 
@@ -798,10 +845,10 @@ namespace AcademiaApp
 			this.groupBox3.Controls.Add(this.label11);
 			this.groupBox3.Controls.Add(this.label12);
 			this.groupBox3.Controls.Add(this.label13);
-			this.groupBox3.Location = new System.Drawing.Point(879, 129);
+			this.groupBox3.Location = new System.Drawing.Point(12, 517);
 			this.groupBox3.Name = "groupBox3";
 			this.groupBox3.Size = new System.Drawing.Size(307, 85);
-			this.groupBox3.TabIndex = 31;
+			this.groupBox3.TabIndex = 43;
 			this.groupBox3.TabStop = false;
 			this.groupBox3.Text = "Miercoles";
 			// 
@@ -930,10 +977,10 @@ namespace AcademiaApp
 			this.groupBox2.Controls.Add(this.label7);
 			this.groupBox2.Controls.Add(this.label8);
 			this.groupBox2.Controls.Add(this.label9);
-			this.groupBox2.Location = new System.Drawing.Point(1227, 38);
+			this.groupBox2.Location = new System.Drawing.Point(360, 426);
 			this.groupBox2.Name = "groupBox2";
 			this.groupBox2.Size = new System.Drawing.Size(307, 85);
-			this.groupBox2.TabIndex = 28;
+			this.groupBox2.TabIndex = 40;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Martes";
 			// 
@@ -1062,10 +1109,10 @@ namespace AcademiaApp
 			this.groupBox1.Controls.Add(this.label4);
 			this.groupBox1.Controls.Add(this.label3);
 			this.groupBox1.Controls.Add(this.label2);
-			this.groupBox1.Location = new System.Drawing.Point(879, 38);
+			this.groupBox1.Location = new System.Drawing.Point(12, 426);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Size = new System.Drawing.Size(307, 85);
-			this.groupBox1.TabIndex = 27;
+			this.groupBox1.TabIndex = 39;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Lunes";
 			// 
@@ -1188,7 +1235,7 @@ namespace AcademiaApp
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1546, 406);
+			this.ClientSize = new System.Drawing.Size(1173, 785);
 			this.Controls.Add(this.radioButtonNo);
 			this.Controls.Add(this.radioButtonYes);
 			this.Controls.Add(this.label1);
